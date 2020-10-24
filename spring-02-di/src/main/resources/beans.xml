@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="address" class="com.douye.pojo.Address">
+        <property name="address" value="China"/>
+    </bean>
+
+    <bean id="student" class="com.douye.pojo.Student">
+        <!--   value注入     -->
+        <property name="name" value="douye"/>
+
+        <!--   ref引用类型注入     -->
+        <property name="address" ref="address"/>
+
+        <!--   数组     -->
+        <property name="books">
+            <array>
+                <value>深入java虚拟机</value>
+                <value>高性能mysql</value>
+                <value>算法4</value>
+            </array>
+        </property>
+
+        <!--   列表     -->
+        <property name="hobbys">
+            <list>
+                <value>健身</value>
+                <value>编程</value>
+                <value>音乐</value>
+            </list>
+        </property>
+
+        <!--   集合     -->
+        <property name="games">
+            <set>
+                <value>QQ飞车</value>
+                <value>CS</value>
+                <value>CS</value>
+            </set>
+        </property>
+
+        <!--   映射     -->
+        <property name="card">
+            <map>
+                <entry key="动物" value="猫"/>
+                <entry key="星球" value="火星"/>
+            </map>
+        </property>
+
+        <!--   null值     -->
+        <property name="girlfriend">
+            <null></null>
+        </property>
+
+        <!--属性设置-->
+        <property name="info">
+            <props>
+                <prop key="user">zhang san</prop>
+                <prop key="age">22</prop>
+                <prop key="phone">888-888</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
