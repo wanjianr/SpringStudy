@@ -9,9 +9,9 @@ class : bean对象的全限定名，包名+类名
 name : 别名，可以指定多个别名，别名间用逗号隔开
 
 -->
-    <bean id="mysqlDao" class="com.douye.dao.UserDaoImpl.MysqlDaoImpl">
-    </bean>
-    <bean id="userService" class="com.douye.service.UserServiceImpl.UserServiceImpl" name="serviceMysql">
-        <property name="userDao" ref="mysqlDao"></property>
+    <bean id="oracleDao" class="com.douye.dao.UserDaoImpl.OracleDaoImpl"></bean>
+
+    <bean id="userService" class="com.douye.service.UserServiceImpl.UserServiceImpl" name="serviceOracle">
+        <property name="userDao" ref="oracleDao"></property>
     </bean>
 </beans>

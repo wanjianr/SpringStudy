@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--  Test01  -->
+    <bean id="user" class="com.douye.pojo.User">
+        <property name="name" value="James"></property>
+    </bean>
+
+    <!--  Test02  -->
+
+    <!--  1. 通过参数下标注入构造参数  -->
+    <bean id="userOne1" class="com.douye.pojo.UserOne">
+        <constructor-arg index="0" value="Zhangsan"></constructor-arg>
+    </bean>
+    <bean id="userOne2" class="com.douye.pojo.UserOne">
+        <constructor-arg index="0" value="Tom"></constructor-arg>
+        <constructor-arg index="1" value="18"></constructor-arg>
+    </bean>
+    <bean id="userOne3" class="com.douye.pojo.UserOne">
+        <constructor-arg index="0" value="Jane"></constructor-arg>
+        <constructor-arg index="1" value="25"></constructor-arg>
+        <constructor-arg index="2" value="male"></constructor-arg>
+    </bean>
+
+    <!-- 2. 通过参数名注入   -->
+    <bean id="userOne4" class="com.douye.pojo.UserOne">
+        <constructor-arg name="name" value="参数名构造"></constructor-arg>
+        <constructor-arg name="age" value="33"></constructor-arg>
+    </bean>
+
+    <!-- 3. 通过参数类型注入（有多个相同类型的参数时，会按照注入顺序进行赋值）   -->
+    <bean id="userOne5" class="com.douye.pojo.UserOne">
+        <constructor-arg type="java.lang.Integer" value="55"></constructor-arg>
+        <constructor-arg type="java.lang.String" value="参数类型构造"></constructor-arg>
+        <constructor-arg type="java.lang.String" value="female"></constructor-arg>
+    </bean>
+</beans>
