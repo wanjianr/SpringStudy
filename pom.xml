@@ -15,6 +15,8 @@
         <module>spring-03-autowired</module>
         <module>spring-04-annotation</module>
         <module>spring-05-appconfig</module>
+        <module>spring-06-proxy</module>
+        <module>spring-07-springaop</module>
     </modules>
     <dependencies>
         <dependency>
