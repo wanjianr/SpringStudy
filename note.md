@@ -164,19 +164,89 @@
  
 ## 使用spring实现aop
 #### 使用前AOP织入，导入依赖包
-```java
-<dependencies>
-    <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
-    <dependency>
-        <groupId>org.aspectj</groupId>
-        <artifactId>aspectjweaver</artifactId>
-        <version>1.9.5</version>
-    </dependency>
-</dependencies>
-```
-#### 方式一：使用原生spring API接口
+    ```java
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.5</version>
+        </dependency>
+    </dependencies>
+    ```
+#### 方式一：使用原生springAPI接口【spring API接口】
 - 编写通知类
-
+    ```java
+    public class BeforeLog implements MethodBeforeAdvice {
+        public void before(Method method, Object[] objects, Object o) throws Throwable {
+            System.out.println("--- BeforeAdvice ---");
+        }
+    }
+    ```
 - 在配置文件中注册bean，并配置aop
-
+    ```java
+    <!-- 注册bean -->
+    <bean id="userService" class="com.douye.method1.UserServiceImpl"/>
+    <bean id="beforeLog" class="com.douye.method1.BeforeLog"/>
+    <bean id="afterLog" class="com.douye.method1.AfterLog"/>
+    
+    <!-- 方式一：导入aop约数，配置aop-->
+    <aop:config>
+        <!--切入点：expression表达式，execution(通知代码需要执行的位置)-->
+        <aop:pointcut id="pointcut" expression="execution(* com.douye.method1.UserServiceImpl.*(..))"/>
+        <!--执行环绕增加-->
+        <aop:advisor advice-ref="beforeLog" pointcut-ref="pointcut"/>
+        <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>
+    </aop:config>
+    ```
 - 测试
+    ```java
+    public class MyTest {
+        public static void main(String[] args) {
+            ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+            UserService userService = (UserService) context.getBean("userService");
+            userService.add();
+        }
+    }
+    ```
+#### 方式二：自定义类实现AOP【切面定义】
+- 自定义增强类
+    ```java
+    public class MyLog {
+        public void before() {
+            System.out.println("--- 方法执行前 ---");
+        }
+        public void after() {
+            System.out.println("=== 方法执行后 ===");
+        }
+    }
+    ```
+- 配置切面
+    ```java
+    <!-- 方式2：自定义类-->
+    <bean id="userService" class="com.douye.method1.UserServiceImpl"/>
+    <bean id="mylog" class="com.douye.method2.MyLog"/>
+    <aop:config>
+        <!--自定义切面，ref表示要引用的类-->
+        <aop:aspect ref="mylog">
+            <!--切入点-->
+            <aop:pointcut id="point" expression="execution(* com.douye.method1.UserServiceImpl.*(..))"/>
+    
+            <!--通知-->
+            <aop:before method="before" pointcut-ref="point"/>
+            <aop:after method="after" pointcut-ref="point"/>
+    
+        </aop:aspect>
+    </aop:config>
+    ```
+- 测试类
+    ```java
+    public class MyTest {
+        public static void main(String[] args) {
+            ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+            UserService userService = (UserService) context.getBean("userService");
+            userService.add();
+        }
+    }
+    ```
+#### 方式三：使用注解实现

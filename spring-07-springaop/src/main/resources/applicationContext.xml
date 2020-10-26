@@ -2,25 +2,42 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/aop
-       http://www.springframework.org/schema/aop/spring-aop.xsd
-       http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-<!--    注册bean-->
-    <bean id="userService" class="com.douye.UserServiceImpl"/>
-    <bean id="beforeLog" class="com.douye.BeforeLog"/>
-    <bean id="afterLog" class="com.douye.AfterLog"/>
+    <!-- 注册bean -->
+    <bean id="userService" class="com.douye.method1.UserServiceImpl"/>
+    <bean id="beforeLog" class="com.douye.method1.BeforeLog"/>
+    <bean id="afterLog" class="com.douye.method1.AfterLog"/>
 
-<!--    导入aop约数，配置aop-->
-    <aop:config>
-<!--        切入点：expression表达式，execution(通知代码需要执行的位置)-->
-        <aop:pointcut id="pointcut" expression="execution(* com.douye.UserServiceImpl.*(..))"/>
-<!--        执行环绕增加-->
-        <aop:advisor advice-ref="beforeLog" pointcut-ref="pointcut"/>
-        <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>
-    </aop:config>
+    <!-- 方式一：导入aop约数，配置aop-->
+<!--    <aop:config>-->
+<!--        &lt;!&ndash;切入点：expression表达式，execution(通知代码需要执行的位置)&ndash;&gt;-->
+<!--        <aop:pointcut id="pointcut" expression="execution(* com.douye.method1.UserServiceImpl.*(..))"/>-->
+<!--        &lt;!&ndash;执行环绕增加&ndash;&gt;-->
+<!--        <aop:advisor advice-ref="beforeLog" pointcut-ref="pointcut"/>-->
+<!--        <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>-->
+<!--    </aop:config>-->
+
+    <!-- 方式2：自定义类-->
+<!--    <bean id="mylog" class="com.douye.method2.MyLog"/>-->
+<!--    <aop:config>-->
+<!--        &lt;!&ndash;自定义切面，ref表示要引用的类&ndash;&gt;-->
+<!--        <aop:aspect ref="mylog">-->
+<!--            &lt;!&ndash;切入点&ndash;&gt;-->
+<!--            <aop:pointcut id="point" expression="execution(* com.douye.method1.UserServiceImpl.*(..))"/>-->
+
+<!--            &lt;!&ndash;通知&ndash;&gt;-->
+<!--            <aop:before method="before" pointcut-ref="point"/>-->
+<!--            <aop:after method="after" pointcut-ref="point"/>-->
+
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+<!--    方式三:注解实现-->
+    <bean id="annotionLog" class="com.douye.method3.AnnotationLog"/>
+<!--    开启注解支持-->
+    <aop:aspectj-autoproxy/>
 </beans>

@@ -1,4 +1,4 @@
-import com.douye.UserService;
+import com.douye.method1.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

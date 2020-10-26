@@ -1,4 +1,4 @@
-package com.douye;
+package com.douye.method1;
 
 public interface UserService {
     public void add();

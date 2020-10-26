@@ -1,4 +1,6 @@
-package com.douye;
+package com.douye.method1;
+
+import com.douye.method1.UserService;
 
 public class UserServiceImpl implements UserService {
     public void add() {
