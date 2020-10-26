@@ -17,6 +17,8 @@
         <module>spring-05-appconfig</module>
         <module>spring-06-proxy</module>
         <module>spring-07-springaop</module>
+        <module>spring-08-mybatis1</module>
+        <module>spring-08-mybatis2</module>
     </modules>
     <dependencies>
         <dependency>
@@ -30,6 +32,7 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
+
     </dependencies>
 
 </project>
