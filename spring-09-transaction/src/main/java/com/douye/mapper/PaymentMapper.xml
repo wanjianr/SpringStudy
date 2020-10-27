@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.douye.mapper.PaymentMapper">
+    <select id="selectPayment" resultType="payment">
+        select * from payment;
+    </select>
+
+    <insert id="insertPayment" parameterType="payment">
+        insert into payment (id, serial) values (#{id},#{serial});
+    </insert>
+
+    <delete id="deletePayment" parameterType="int">
+        delete from payment where id = #{id};
+    </delete>
+</mapper>

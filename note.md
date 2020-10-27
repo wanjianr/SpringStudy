@@ -412,5 +412,9 @@
     ```
   
 ## spring整合Mybatis方法一
-
-## springz整合Mybatis方法二
+- 编写数据源配置
+- sqlSessionFactory
+- sqlSessionTemplate
+- 实现对应d接口
+- 将实现类注入到spring
+- 测试

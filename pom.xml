@@ -19,6 +19,7 @@
         <module>spring-07-springaop</module>
         <module>spring-08-mybatis1</module>
         <module>spring-08-mybatis2</module>
+        <module>spring-09-transaction</module>
     </modules>
     <dependencies>
         <dependency>

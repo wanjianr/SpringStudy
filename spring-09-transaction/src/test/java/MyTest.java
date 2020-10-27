@@ -1,5 +1,4 @@
-import com.douye.mapper.UserMapper;
-import com.douye.mapper.UserMapperImpl;
+import com.douye.mapper.PaymentMapper;
 import com.douye.pojo.Payment;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -11,10 +10,10 @@ public class MyTest {
     @Test
     public void test() {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        UserMapper userMapper = context.getBean("userMapper",UserMapper.class);
-        List<Payment> data = userMapper.findData();
-        for (Payment datum : data) {
-            System.out.println(datum.toString());
+        PaymentMapper paymentMapper = context.getBean("paymentMapper", PaymentMapper.class);
+        List<Payment> payments = paymentMapper.selectPayment();
+        for (Payment payment : payments) {
+            System.out.println(payment.toString());
         }
     }
 }
