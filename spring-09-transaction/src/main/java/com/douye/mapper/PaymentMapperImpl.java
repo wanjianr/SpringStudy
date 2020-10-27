@@ -14,7 +14,11 @@ public class PaymentMapperImpl implements PaymentMapper {
     }
 
     public List<Payment> selectPayment() {
-        return sqlSessionTemplate.getMapper(PaymentMapper.class).selectPayment();
+        Payment payment = new Payment(6,"2020-10-27 10:40:21");
+        PaymentMapper mapper = sqlSessionTemplate.getMapper(PaymentMapper.class);
+        mapper.insert(payment);
+        mapper.delete(10);
+        return mapper.selectPayment();
     }
 
     public void delete(int id) {

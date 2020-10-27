@@ -8,11 +8,11 @@
         select * from payment;
     </select>
 
-    <insert id="insertPayment" parameterType="payment">
+    <insert id="insert" parameterType="payment">
         insert into payment (id, serial) values (#{id},#{serial});
     </insert>
 
-    <delete id="deletePayment" parameterType="int">
+    <delete id="delete" parameterType="int">
         delete from payment where id = #{id};
     </delete>
 </mapper>
